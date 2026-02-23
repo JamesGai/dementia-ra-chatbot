@@ -1,5 +1,13 @@
-import os
+# Create virtual environment:
+# python3 -m venv venv
 
+# Activate virtual environment:
+# source venv/bin/activate
+
+# Deactivate virtual environment:
+# deactivate
+
+import os
 from app import create_app
 from app.gemini import generate_text
 

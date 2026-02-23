@@ -33,19 +33,7 @@ Minimal Flask project scaffold.
 ## Run
 
 ```bash
-flask --app run run --debug
+python run.py
 ```
 
 Then open `http://127.0.0.1:5000/`.
-
-## Test Gemini
-
-Use this request to test Gemini before frontend integration:
-
-```bash
-curl -X POST http://127.0.0.1:5000/api/gemini \
-  -H "Content-Type: application/json" \
-  -d '{"prompt":"Explain AI in one sentence"}'
-```
-
-The response is returned as JSON and also printed in the Flask terminal logs.
