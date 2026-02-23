@@ -9,7 +9,7 @@ Minimal Flask project scaffold.
 ├── app
 │   ├── __init__.py
 │   └── routes.py
-├── .env.example
+├── .env
 ├── requirements.txt
 └── run.py
 ```
@@ -25,11 +25,7 @@ Minimal Flask project scaffold.
    ```bash
    pip install -r requirements.txt
    ```
-3. (Optional) load environment values:
-   ```bash
-   cp .env.example .env
-   ```
-4. Add your Gemini API key in `.env`:
+3. Add your Gemini API key in `.env`:
    ```bash
    GEMINI_API_KEY=your_real_key
    ```
