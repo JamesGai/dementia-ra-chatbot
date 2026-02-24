@@ -1,0 +1,83 @@
+[
+  {
+    "id": "manual_login",
+    "page": "manual",
+    "section": "login",
+    "source": "e-DiVA",
+    "content_type": "navigation_instruction",
+    "title": "How to Log In",
+    "content": "Instructions on how to log in to the e-DiVA application. This section explains the steps required to access your account securely."
+  },
+  {
+    "id": "manual_profile",
+    "page": "manual",
+    "section": "profile",
+    "source": "e-DiVA",
+    "content_type": "navigation_instruction",
+    "title": "How to Update Your Profile",
+    "content": "Instructions on how to update your personal profile information within the e-DiVA application."
+  },
+  {
+    "id": "manual_search",
+    "page": "manual",
+    "section": "search",
+    "source": "e-DiVA",
+    "content_type": "navigation_instruction",
+    "title": "How to Search e-DiVA Content",
+    "content": "Instructions on how to search for educational materials, resources, and caregiving information using the search feature."
+  },
+  {
+    "id": "manual_course",
+    "page": "manual",
+    "section": "course",
+    "source": "e-DiVA",
+    "content_type": "navigation_instruction",
+    "title": "How to Access the Online Course",
+    "content": "Instructions on how to access and complete the iSupport online course and related learning materials."
+  },
+  {
+    "id": "manual_diary",
+    "page": "manual",
+    "section": "diary",
+    "source": "e-DiVA",
+    "content_type": "navigation_instruction",
+    "title": "How to Use the Diary",
+    "content": "Instructions on how to use the diary feature to organise appointments and caregiving activities."
+  },
+  {
+    "id": "manual_peer",
+    "page": "manual",
+    "section": "peer",
+    "source": "e-DiVA",
+    "content_type": "navigation_instruction",
+    "title": "How to Use Peer Support",
+    "content": "Instructions on how to connect with other carers using the peer support feature."
+  },
+  {
+    "id": "manual_videos",
+    "page": "manual",
+    "section": "videos",
+    "source": "e-DiVA",
+    "content_type": "navigation_instruction",
+    "title": "How to Access Videos and Animations",
+    "content": "Instructions on how to view educational videos and animations within the app."
+  },
+  {
+    "id": "manual_service",
+    "page": "manual",
+    "section": "service",
+    "source": "e-DiVA",
+    "content_type": "navigation_instruction",
+    "title": "How to Find Dementia Services",
+    "content": "Instructions on how to locate available dementia care services in your area."
+  },
+  {
+    "id": "manual_chatbot",
+    "page": "manual",
+    "section": "chatbot",
+    "source": "e-DiVA",
+    "content_type": "navigation_instruction",
+    "title": "How to Use the Chatbot",
+    "content": "Instructions on how to use the e-DiVA chatbot to ask questions and receive caregiving support."
+  }
+]
