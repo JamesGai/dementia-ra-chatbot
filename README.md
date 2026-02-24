@@ -13,9 +13,17 @@ To handle dynamic knowledge, we need to retrieve them from the database before e
 ```text
 .
 ├── app
-│   ├── __init__.py
-│   └── routes.py
+│   ├── embeddings.py
+│   ├── gemini.py
+│   ├── static_knowledge_loader.py
+│   └── dynamic_knowledge_service.py
+├── data
+│   ├── static_knowledge.json
+├── scripts
+│   ├── test_dynamic_knowledge_fetch.py
+│   └── test_dynamic_knowledge_embeddings.py
 ├── .env
+├── README.md
 ├── requirements.txt
 └── run.py
 ```
