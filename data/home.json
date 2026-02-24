@@ -10,6 +10,24 @@
     "content": "Are you currently providing care for someone with dementia? Caring for someone with dementia can be both rewarding and challenging. e-DiVA is here to support you with a smart, easy-to-use Virtual Assistant designed to help you manage the responsibilities of caregiving.\n\n e-DiVA seeks to improve caregiver well-being by offering access to educational content and caring information. It aims to educate, provide skills, and offer support to carers.\n\n Whether you are looking for practical advice, emotional support, or tools to manage daily care, e-DiVA offers:\n\n - On-demand guidance through voice or text search\n - Culturally tailored resources in multiple languages\n - Video tutorials to help with everyday caregiving tasks\n - Tips and strategies to reduce stress and improve well-being"
   },
   {
+    "id": "home_search_bar",
+    "page": "home",
+    "section": "search",
+    "source": "e-DiVA",
+    "content_type": "navigation_instruction",
+    "title": "Search Resources",
+    "content": "The search bar on the home page allows users to search for educational resources, caregiving information, and dementia-related content by entering keywords."
+  },
+  {
+    "id": "home_chatbot_button",
+    "page": "home",
+    "section": "chatbot_entry",
+    "source": "e-DiVA",
+    "content_type": "navigation_instruction",
+    "title": "Access the e-DiVA Chatbot",
+    "content": "The e-DiVA chatbot button on the home page provides quick access to the virtual assistant. Users can tap the blue chatbot button to ask questions and receive caregiving guidance."
+  },
+  {
     "id": "intro_logged_in_overview",
     "page": "home",
     "source": "e-DiVA",
@@ -18,5 +36,14 @@
     "audience_state": "logged_in",
     "title": "Welcome to e-DiVA (Logged In)",
     "content": "e-DiVA is a platform that provides resources to support people who care for a loved one living with dementia (also known as carers or care partners).\n\n Here you can access the iSupport course, watch educational videos, stay up to date with dementia-related news, and find local support services.\n\n You will also find instructional videos throughout the app to help you navigate its features. You can refer to the e-DiVA user guide at any time for additional support."
+  },
+  {
+    "id": "home_join_now",
+    "page": "home",
+    "section": "membership_entry",
+    "source": "e-DiVA",
+    "content_type": "navigation_instruction",
+    "title": "Become a Member",
+    "content": "The 'Join Now' button allows users to create an account or log in to access personalised features within the e-DiVA application."
   }
 ]
