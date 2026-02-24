@@ -29,3 +29,6 @@ if __name__ == "__main__":
             print(f"[Gemini startup test failed] {exc}")
 
     app.run(host=host, port=port, debug=debug)
+
+# Static knowledge → load_static_knowledge()
+# Dynamic knowledge → get_video_knowledge_objects()

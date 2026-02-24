@@ -1,0 +1,38 @@
+[
+  {
+    "id": "profile_login",
+    "page": "profile",
+    "section": "login",
+    "source": "e-DiVA",
+    "content_type": "account_management",
+    "title": "Log In to Your Account",
+    "content": "Users can log in by entering their email address and password. If you forget your password, use the 'Forgot password?' option. New users can create an account if they do not already have one."
+  },
+  {
+    "id": "profile_forgot_password",
+    "page": "profile",
+    "section": "forgot_password",
+    "source": "e-DiVA",
+    "content_type": "account_management",
+    "title": "Reset Your Password",
+    "content": "If you have forgotten your password, you can reset it by entering your registered email address. A password reset link will be sent to your email. Follow the instructions in the email to create a new password."
+  },
+  {
+    "id": "profile_account_creation",
+    "page": "profile",
+    "section": "account_creation",
+    "source": "e-DiVA",
+    "content_type": "account_management",
+    "title": "Create an Account",
+    "content": "To create an account, users must provide their first name, last name, email address, phone number, username, and password. Users must confirm their password and provide additional details such as city, country, user role, and purpose of use. Users must agree to the Terms and Privacy Policy before creating an account."
+  },
+  {
+    "id": "profile_font_size",
+    "page": "profile",
+    "section": "font_size",
+    "source": "e-DiVA",
+    "content_type": "accessibility_setting",
+    "title": "Adjust Font Size",
+    "content": "Users can adjust the app font size to improve readability. Available options include Standard, Large, and Extra Large. Users can reset font size to the default setting at any time."
+  }
+]

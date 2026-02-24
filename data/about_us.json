@@ -1,0 +1,63 @@
+[
+  {
+    "id": "about_purpose",
+    "page": "about_us",
+    "section": "the_purpose",
+    "source": "e-DiVA",
+    "content_type": "system_information",
+    "category": "project_background",
+    "title": "The Purpose of e-DiVA",
+    "content": "e-DiVA aims to empower carers of people with dementia with an iSupport Virtual Assistant. The e-DiVA platform allows users to interact with other carers, read educational material, locate support and health services, and track appointments. It recognises that carers often lack time to search through scattered information, so key caregiving functions have been collated into one accessible system."
+  },
+  {
+    "id": "about_project",
+    "page": "about_us",
+    "section": "the_project",
+    "source": "e-DiVA",
+    "content_type": "system_information",
+    "category": "project_background",
+    "title": "The e-DiVA Project",
+    "content": "Starting in 2021, this project culturally and contextually adapts the iSupport for dementia programme developed by the World Health Organization (WHO) to fit healthcare systems in Australia, Indonesia, New Zealand, and Vietnam. To support carers of people with dementia, e-DiVA provides key functions including: iSupport online course and videos to improve caring skills and knowledge; a diary to keep everything organised; peer support to connect with other carers; voice search; recommended content tailored to caring needs assessment; and available dementia care services in the user's area."
+  },
+  {
+    "id": "about_team_overview",
+    "page": "about_us",
+    "section": "the_team",
+    "source": "e-DiVA",
+    "content_type": "system_information",
+    "category": "team_information",
+    "title": "The Research Team",
+    "content": "e-DiVA is supported by a team of international researchers dedicated to improving caregiving skills and the mental health of those who care for someone with dementia."
+  },
+  {
+    "id": "about_team_nz",
+    "page": "about_us",
+    "section": "team_member",
+    "source": "e-DiVA",
+    "content_type": "system_information",
+    "category": "team_information",
+    "country": "New Zealand",
+    "title": "New Zealand Research Staff",
+    "content": "Mr James Gai, Research Staff, The University of Auckland."
+  },
+  {
+    "id": "about_contact_overview",
+    "page": "about_us",
+    "section": "contact_overview",
+    "source": "e-DiVA",
+    "content_type": "system_information",
+    "category": "contact_information",
+    "title": "Contact Information Overview",
+    "content": "If you need help or more information, you can call, email, or send a message to the e-DiVA team."
+  },
+  {
+    "id": "about_contact_details",
+    "page": "about_us",
+    "section": "contact_details",
+    "source": "e-DiVA",
+    "content_type": "system_information",
+    "category": "contact_information",
+    "title": "Contact Details",
+    "content": "Phone: +64 21 12345678. Email: user123@auckland.uni.ac.nz. Location: The University of Auckland."
+  }
+]

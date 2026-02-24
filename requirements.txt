@@ -1,3 +1,5 @@
 Flask==3.1.0
 google-genai
 python-dotenv
+firebase-admin
+sentence-transformers
