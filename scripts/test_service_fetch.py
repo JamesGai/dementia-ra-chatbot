@@ -16,6 +16,5 @@ def main():
         print(service["id"])
         print(service["semantic_text"])
 
-
 if __name__ == "__main__":
     main()

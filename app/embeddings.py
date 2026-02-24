@@ -21,7 +21,6 @@ def get_embedding_client():
         raise RuntimeError("Missing GEMINI_API_KEY")
     return genai.Client(api_key=api_key)
 
-
 def _embed_text_gemini(text: str):
     """Generate an embedding for text using the configured Gemini model."""
     client = get_embedding_client()
@@ -59,7 +58,6 @@ def _get_local_model():
     _local_model = SentenceTransformer(LOCAL_EMBEDDING_MODEL)
     return _local_model
 
-
 def _embed_text_local(text: str):
     """Generate an embedding for text with the local transformer model."""
     model = _get_local_model()
@@ -67,7 +65,6 @@ def _embed_text_local(text: str):
     if hasattr(vector, "tolist"):
         return vector.tolist()
     return vector
-
 
 def embed_text(text: str):
     """Embed text with either Gemini or local model based on provider config."""
