@@ -8,9 +8,16 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from app.video_service import get_video_knowledge_objects
 
-videos = get_video_knowledge_objects()
 
-for v in videos:
-    print("=" * 50)
-    print(v["id"])
-    print(v["semantic_text"])
+def main():
+    """Fetch and print transformed video knowledge JSON objects."""
+    videos = get_video_knowledge_objects()
+
+    for video in videos:
+        print("=" * 50)
+        print(video["id"])
+        print(video["semantic_text"])
+
+
+if __name__ == "__main__":
+    main()

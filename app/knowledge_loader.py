@@ -3,8 +3,8 @@ import json
 
 DATA_DIR = "data"
 
-
 def load_static_knowledge():
+    """Load and combine static JSON knowledge entries from the data directory."""
     all_entries = []
 
     for filename in os.listdir(DATA_DIR):

@@ -15,6 +15,7 @@ LOCAL_EMBEDDING_MODEL = os.getenv("LOCAL_EMBEDDING_MODEL")
 _local_model = None
 
 def get_embedding_client():
+    """Create a Gemini client using the configured API key."""
     api_key = os.getenv("GEMINI_API_KEY")
     if not api_key:
         raise RuntimeError("Missing GEMINI_API_KEY")
@@ -22,6 +23,7 @@ def get_embedding_client():
 
 
 def _embed_text_gemini(text: str):
+    """Generate an embedding for text using the configured Gemini model."""
     client = get_embedding_client()
 
     response = client.models.embed_content(
@@ -41,6 +43,7 @@ def _embed_text_gemini(text: str):
 
 
 def _get_local_model():
+    """Lazily load and cache the local sentence-transformer model."""
     global _local_model
     if _local_model is not None:
         return _local_model
@@ -58,6 +61,7 @@ def _get_local_model():
 
 
 def _embed_text_local(text: str):
+    """Generate an embedding for text with the local transformer model."""
     model = _get_local_model()
     vector = model.encode(text, normalize_embeddings=True)
     if hasattr(vector, "tolist"):
@@ -66,6 +70,7 @@ def _embed_text_local(text: str):
 
 
 def embed_text(text: str):
+    """Embed text with either Gemini or local model based on provider config."""
     if EMBEDDING_PROVIDER == "local":
         return _embed_text_local(text)
     if EMBEDDING_PROVIDER == "gemini":
