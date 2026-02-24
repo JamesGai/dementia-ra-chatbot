@@ -1,6 +1,12 @@
-# Flask Starter
+# Dementia RA chatbot
 
-Minimal Flask project scaffold.
+This backend server is responsible for providing chatbot service to the [Dementia RA mobile application](https://github.com/JamesGai/dementia-ra.git). The implementation of this chatbot has two parts: LLM and knowledge base creation.
+
+LLM is relatively eaiser as it only encompasses configuration and transmission to frontend. However, to build a knowledge base, we have to have a vector database ready with knowledge data being retrieved (from the database), transformed into JSON objects, and embedded by an embedding function.
+
+There are also two types of knowledge, static knowledge and dynamic knowledge. Static knowledge is the built-in system message such as greetings, which is stored in data folder. Dynamic knowledge such as videos, courses, and services which changes rapidly as it is stored in the database.
+
+To handle dynamic knowledge, we need to retrieve them from the database before embedding them.
 
 ## Project structure
 
