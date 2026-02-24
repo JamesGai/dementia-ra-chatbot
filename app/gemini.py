@@ -1,8 +1,13 @@
 import os
+from pathlib import Path
 from functools import lru_cache
 from google import genai
+from dotenv import load_dotenv
 
-DEFAULT_MODEL = "gemini-2.5-flash"
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+load_dotenv(PROJECT_ROOT / ".env")
+
+GEMINI_MODEL = (os.getenv("GEMINI_MODEL") or "gemini-2.5-flash").strip()
 
 @lru_cache(maxsize=1)
 def get_client() -> genai.Client:
@@ -14,7 +19,6 @@ def get_client() -> genai.Client:
         )
     return genai.Client(api_key=api_key)
 
-
-def generate_text(prompt: str, model: str = DEFAULT_MODEL) -> str:
+def generate_text(prompt: str, model: str = GEMINI_MODEL) -> str:
     response = get_client().models.generate_content(model=model, contents=prompt)
     return (response.text or "").strip()
