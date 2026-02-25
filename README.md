@@ -44,6 +44,36 @@ To handle dynamic knowledge, we need to retrieve them from the database before e
    ```bash
    GEMINI_API_KEY=your_real_key
    ```
+## Vector Database (Chroma)
+
+```bash
+Static JSON - Static
+Firestore (videos, course, services) - Dynamic
+        ↓
+Embedding (local or Gemini)
+        ↓
+Chroma vector database
+```
+One dependency in Chroma ```Pydantic``` is not compatible with the latest Python version ```python 3.14```. Therefore, we need to downgrade the python to a suitable version ```python 3.11```.
+   - Install [Homebrew](https://brew.sh/) (Recommended)
+      - Follow installation on official website
+      - Verify installation
+         - ```brew --version```
+   - Install Python
+      - ```brew install python@3.11```
+      - Verify installation
+         - ```python3.11 --version```
+   - Create new virtual environment
+      - Deactivate (if necessary)
+         - ```deactivate```
+      - Remove old virtrual environment
+         - ```rm -rf .venv```
+      - Create new one
+         - ```python3.11 -m venv .venv```
+      - Activate and verify python version
+         - ```source .venv/bin/activate```
+         - ```python --version```
+      - [Official discussion](https://github.com/chroma-core/chroma/issues/5996) of this incompatibity
 
 ## Run
 
