@@ -1,7 +1,9 @@
-# python scripts/ingest_to_chroma.py
+"""Ingest static + Firestore knowledge into the Chroma collection."""
 
+import argparse
 import sys
 from pathlib import Path
+from typing import Any
 
 # Allow running this file directly from the repo root
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -10,15 +12,19 @@ from app.static_knowledge_loader import load_static_knowledge
 from app.video_service import get_video_knowledge_objects
 from app.service_service import get_service_knowledge_objects
 from app.embeddings import embed_text
-from app.vector_store import get_vector_store, get_chroma_client
+from app.vector_store import (
+    DEFAULT_COLLECTION_NAME,
+    get_chroma_client,
+    get_vector_store,
+)
 
-def sanitize_metadata(metadata: dict):
+def sanitize_metadata(metadata: dict[str, Any]) -> dict[str, Any]:
     """
     Ensure metadata only contains types supported by Chroma:
     str, int, float, bool, list, or None.
     Convert unsupported types (e.g., Firestore timestamps) to string.
     """
-    clean = {}
+    clean: dict[str, Any] = {}
 
     for key, value in metadata.items():
         if value is None:
@@ -40,18 +46,23 @@ def sanitize_metadata(metadata: dict):
 
     return clean
 
+def _reset_collection() -> None:
+    """Delete and recreate the target collection if it already exists."""
+    print("[ingest] Resetting existing collection...")
+    client = get_chroma_client()
+    try:
+        client.delete_collection(name=DEFAULT_COLLECTION_NAME)
+    except Exception:
+        # Collection may not exist yet; safe to continue.
+        pass
 
-def ingest(reset_collection=False):
+def ingest(reset_collection: bool = False) -> None:
+    """Load all knowledge sources, embed entries, and store them in Chroma."""
     collection = get_vector_store()
 
     if reset_collection:
-        print("[ingest] Resetting existing collection...")
-        client = get_chroma_client()
-        try:
-            client.delete_collection(name="ediva_knowledge")
-        except Exception:
-            pass
-        collection = client.get_or_create_collection(name="ediva_knowledge")
+        _reset_collection()
+        collection = get_vector_store()
 
     print("[ingest] Loading static knowledge...")
     static_entries = load_static_knowledge()
@@ -72,12 +83,14 @@ def ingest(reset_collection=False):
     embs = []
 
     for idx, entry in enumerate(all_entries, start=1):
+        entry_id = entry.get("id")
         text = entry.get("content") or entry.get("semantic_text")
 
-        if not text:
+        if not entry_id or not text:
+            print(f"[ingest] Skipping {idx}/{len(all_entries)}: missing id/text")
             continue
 
-        print(f"[ingest] Embedding {idx}/{len(all_entries)}: {entry['id']}")
+        print(f"[ingest] Embedding {idx}/{len(all_entries)}: {entry_id}")
 
         vector = embed_text(text)
 
@@ -89,10 +102,14 @@ def ingest(reset_collection=False):
 
         clean_meta = sanitize_metadata(raw_meta)
 
-        ids.append(entry["id"])
+        ids.append(entry_id)
         docs.append(text)
         metas.append(clean_meta)
         embs.append(vector)
+
+    if not ids:
+        print("[ingest] No valid entries to add. Ingest finished with 0 vectors.")
+        return
 
     print("[ingest] Adding embeddings to Chroma...")
 
@@ -100,12 +117,21 @@ def ingest(reset_collection=False):
         ids=ids,
         documents=docs,
         metadatas=metas,
-        embeddings=embs
+        embeddings=embs,
     )
 
     print(f"[ingest] Successfully added {len(ids)} vectors.")
 
+def _parse_args() -> argparse.Namespace:
+    """Parse CLI options for ingestion."""
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--reset",
+        action="store_true",
+        help="Delete and recreate the collection before ingestion.",
+    )
+    return parser.parse_args()
 
 if __name__ == "__main__":
-    # Change to True if you want to wipe existing vectors before re-ingesting
-    ingest(reset_collection=True)
+    args = _parse_args()
+    ingest(reset_collection=args.reset)
