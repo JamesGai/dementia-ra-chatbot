@@ -25,6 +25,7 @@ To handle dynamic knowledge, we need to retrieve them from the database before e
 ├── .env
 ├── README.md
 ├── requirements.txt
+├── chat_cli.py
 └── run.py
 ```
 
@@ -51,3 +52,14 @@ python run.py
 ```
 
 Then open `http://127.0.0.1:5000/`.
+
+## Chat in Terminal (No Frontend)
+
+1. Start the Flask server:
+   ```bash
+   python run.py
+   ```
+2. In a second terminal (same virtual env), start the chat client:
+   ```bash
+   python chat_cli.py
+   ```
