@@ -10,6 +10,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from app.static_knowledge_loader import load_static_knowledge
 from app.video_service import get_video_knowledge_objects
+from app.course_service import get_course_knowledge_objects
 from app.service_service import get_service_knowledge_objects
 from app.embeddings import embed_text
 from app.vector_store import (
@@ -70,10 +71,13 @@ def ingest(reset_collection: bool = False) -> None:
     print("[ingest] Loading video knowledge...")
     video_entries = get_video_knowledge_objects()
 
+    print("[ingest] Loading course knowledge...")
+    course_entries = get_course_knowledge_objects()
+
     print("[ingest] Loading service knowledge...")
     service_entries = get_service_knowledge_objects()
 
-    all_entries = static_entries + video_entries + service_entries
+    all_entries = static_entries + video_entries + course_entries + service_entries
 
     print(f"[ingest] Total entries to process: {len(all_entries)}")
 
