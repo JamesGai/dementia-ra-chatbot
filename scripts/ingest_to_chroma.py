@@ -1,3 +1,5 @@
+# python ingest_to_chroma.py
+
 """Ingest static + Firestore knowledge into the Chroma collection."""
 
 import argparse
