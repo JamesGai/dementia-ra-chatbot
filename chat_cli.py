@@ -5,7 +5,6 @@ from urllib import error, request
 DEFAULT_URL = "http://127.0.0.1:5000/api/gemini"
 EXIT_WORDS = {"exit", "quit", ":q"}
 
-
 def send_prompt(url: str, prompt: str) -> str:
     payload = json.dumps({"prompt": prompt}).encode("utf-8")
     req = request.Request(

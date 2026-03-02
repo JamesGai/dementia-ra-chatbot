@@ -1,31 +1,25 @@
 from app.embeddings import embed_text
-from app.vector_store import get_vector_store
 from app.gemini import generate_text
+from app.vector_store import get_vector_store
 
 
 def retrieve(query: str, top_k: int = 5):
-    """
-    Embed query and retrieve top-k documents from Chroma.
-    """
+    """Embed query text and retrieve top-k documents from Chroma."""
     collection = get_vector_store()
-
     query_embedding = embed_text(query)
 
     results = collection.query(
         query_embeddings=[query_embedding],
-        n_results=top_k
+        n_results=top_k,
     )
 
     return results["documents"][0], results["metadatas"][0]
 
 
 def build_prompt(user_query: str, retrieved_chunks: list[str]) -> str:
-    """
-    Construct final prompt string to send to LLM.
-    """
-
+    """Build the final context-grounded prompt for generation."""
     context_block = "\n\n".join(
-        [f"Context {i+1}:\n{chunk}" for i, chunk in enumerate(retrieved_chunks)]
+        [f"Context {i + 1}:\n{chunk}" for i, chunk in enumerate(retrieved_chunks)]
     )
 
     system_instructions = """
@@ -54,15 +48,7 @@ Answer:
 
 
 def generate_rag_answer(user_query: str) -> str:
-    """
-    Full RAG pipeline:
-    retrieve → build prompt → call Gemini
-    """
-
-    docs, metas = retrieve(user_query)
-
+    """Run the RAG pipeline: retrieve context, build prompt, and generate output."""
+    docs, _ = retrieve(user_query)
     prompt = build_prompt(user_query, docs)
-
-    response = generate_text(prompt)
-
-    return response
+    return generate_text(prompt)
