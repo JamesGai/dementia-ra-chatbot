@@ -1,4 +1,4 @@
-# python ingest_to_chroma.py
+# python scripts/ingest_to_chroma.py
 
 """Ingest static + Firestore knowledge into the Chroma collection."""
 
