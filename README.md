@@ -10,22 +10,25 @@ To handle dynamic knowledge, we need to retrieve them from the database before e
 
 ## Project structure
 
+![Chatbot Architecture](/public/Architecture.png)
+
 ```text
-.
 ├── app
 │   ├── embeddings.py
 │   ├── gemini.py
 │   ├── static_knowledge_loader.py
-│   └── dynamic_knowledge_service.py
+│   └── dynamic_knowledge_service.py - (video, course, service)
 ├── data
 │   ├── static_knowledge.json
 ├── scripts
+│   ├── ingest_to_chroma.py
+│   ├── test_rag_chat.py
+│   ├── test_vector_search.py
 │   ├── test_dynamic_knowledge_fetch.py
 │   └── test_dynamic_knowledge_embeddings.py
 ├── .env
 ├── README.md
 ├── requirements.txt
-├── chat_cli.py
 └── run.py
 ```
 
@@ -44,52 +47,103 @@ To handle dynamic knowledge, we need to retrieve them from the database before e
    ```bash
    GEMINI_API_KEY=your_real_key
    ```
+4. Select embedding function in `.env`:
+   ```bash
+   EMBEDDING_PROVIDER=gemini
+   ```
+   ```bash
+   EMBEDDING_PROVIDER=local
+   ```
+
 ## Vector Database (Chroma)
 
 ```bash
-Static JSON - Static
-Firestore (videos, course, services) - Dynamic
+Static JSON - Static knowledge
+Firestore (videos, course, services) - Dynamic knowledge
         ↓
 Embedding (local or Gemini)
         ↓
 Chroma vector database
 ```
-One dependency in Chroma ```Pydantic``` is not compatible with the latest Python version ```python 3.14```. Therefore, we need to downgrade the python to a suitable version ```python 3.11```.
-   - Install [Homebrew](https://brew.sh/) (Recommended)
-      - Follow installation on official website
-      - Verify installation
-         - ```brew --version```
-   - Install Python
-      - ```brew install python@3.11```
-      - Verify installation
-         - ```python3.11 --version```
-   - Create new virtual environment
-      - Deactivate (if necessary)
-         - ```deactivate```
-      - Remove old virtrual environment
-         - ```rm -rf .venv```
-      - Create new one
-         - ```python3.11 -m venv .venv```
-      - Activate and verify python version
-         - ```source .venv/bin/activate```
-         - ```python --version```
-      - [Official discussion](https://github.com/chroma-core/chroma/issues/5996) of this incompatibity
 
-## Run
+### Python 3.11 setup
+
+One dependency in Chroma `Pydantic` is not compatible with the latest Python version `python 3.14`. Therefore, we need to downgrade the python to a suitable version `python 3.11`.
+
+- Install [Homebrew](https://brew.sh/) (Recommended)
+  - Follow installation on official website
+  - Verify installation
+    - `brew --version`
+- Install Python
+  - `brew install python@3.11`
+  - Verify installation
+    - `python3.11 --version`
+- Create new virtual environment
+  - Deactivate (if necessary)
+    - `deactivate`
+  - Remove old virtrual environment
+    - `rm -rf .venv`
+  - Create new one
+    - `python3.11 -m venv .venv`
+  - Activate and verify python version
+    - `source .venv/bin/activate`
+    - `python --version`
+  - [Official discussion](https://github.com/chroma-core/chroma/issues/5996) of this incompatibity
+
+### Database setup
+
+1. Transform static and dynamic knowledge into embeddings then load to Chroma:
+   ```bash
+   python scripts/ingest_to_chroma.py
+   ```
+
+## App
+
+- `<video><course><service>_service.py`:
+  - Return all **video**/**course**/**service** knowledge as JSON objects ready for embedding
+- `firestore_client.py`
+  - Firebase configuration targets to dynamic knowledge retrieval
+- `embeddings.py`
+  - Transform data into embeddings using either local or cloud (Gemini) embedding function
+- `gemini.py`
+  - LLM (Gemini 2.5 Flash) configuration and inference
+- `rag_service.py`
+  - Full RAG pipeline, with retrieval function, prompt construction, and final answer generation implemented
+  - This is where LLM needs to go through in order to generate context-relevant response
+- `routes.py`
+  - Raw and RAG-pipelined LLM endpoints
+- `static_knowledge_loader.py`
+  - Helper function that reads all built-in JSON data
+- `vector_store.py`
+  - Helpers for creating and accessing the project's Chroma vector store
+
+## Scripts
+
+- Fetch and display transformed **video**/**course**/**service** knowledge as JSON objects:
+  ```bash
+  python scripts/test_<video><course><service>_fetch.py
+  ```
+- Generate and display embeddings of fetched **video**/**course**/**service** knowledge:
+  ```bash
+  python scripts/test_<video><course><service>_embeddings.py
+  ```
+- Transform static and dynamic knowledge into embeddings then load to Chroma:
+  ```bash
+  python scripts/ingest_to_chroma.py
+  ```
+- Embed a query, run search in Chroma vector database, and print the top 3 matches:
+  ```bash
+  python scripts/test_vector_search.py
+  ```
+- Run a simple CLI loop to manually test RAG chat responses:
+  ```bash
+  python scripts/test_rag_chat.py
+  ```
+
+## Start Server
 
 ```bash
 python run.py
 ```
 
 Then open `http://127.0.0.1:5000/`.
-
-## Chat in Terminal (No Frontend)
-
-1. Start the Flask server:
-   ```bash
-   python run.py
-   ```
-2. In a second terminal (same virtual env), start the chat client:
-   ```bash
-   python chat_cli.py
-   ```

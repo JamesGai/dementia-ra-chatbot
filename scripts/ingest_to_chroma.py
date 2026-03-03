@@ -1,3 +1,5 @@
+# python scripts/ingest_to_chroma.py
+
 """Ingest static + Firestore knowledge into the Chroma collection."""
 
 import argparse
@@ -18,6 +20,7 @@ from app.vector_store import (
     get_chroma_client,
     get_vector_store,
 )
+
 
 def sanitize_metadata(metadata: dict[str, Any]) -> dict[str, Any]:
     """
@@ -47,6 +50,7 @@ def sanitize_metadata(metadata: dict[str, Any]) -> dict[str, Any]:
 
     return clean
 
+
 def _reset_collection() -> None:
     """Delete and recreate the target collection if it already exists."""
     print("[ingest] Resetting existing collection...")
@@ -56,6 +60,7 @@ def _reset_collection() -> None:
     except Exception:
         # Collection may not exist yet; safe to continue.
         pass
+
 
 def ingest(reset_collection: bool = False) -> None:
     """Load all knowledge sources, embed entries, and store them in Chroma."""
@@ -126,6 +131,7 @@ def ingest(reset_collection: bool = False) -> None:
 
     print(f"[ingest] Successfully added {len(ids)} vectors.")
 
+
 def _parse_args() -> argparse.Namespace:
     """Parse CLI options for ingestion."""
     parser = argparse.ArgumentParser(description=__doc__)
@@ -135,6 +141,7 @@ def _parse_args() -> argparse.Namespace:
         help="Delete and recreate the collection before ingestion.",
     )
     return parser.parse_args()
+
 
 if __name__ == "__main__":
     args = _parse_args()
