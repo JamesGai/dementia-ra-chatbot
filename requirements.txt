@@ -5,3 +5,4 @@ firebase-admin
 sentence-transformers
 chromadb
 flask-cors
+gunicorn

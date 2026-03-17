@@ -16,8 +16,8 @@ app = create_app()
 
 if __name__ == "__main__":
     host = "0.0.0.0"
-    port = 5050
-    debug = True
+    port = int(os.getenv("PORT", "5050"))
+    debug = os.getenv("FLASK_DEBUG", "true").lower() == "true"
 
     # Print once from the serving process (avoid duplicate print from reloader parent).
     if not debug or os.environ.get("WERKZEUG_RUN_MAIN") == "true":

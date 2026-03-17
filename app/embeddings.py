@@ -8,7 +8,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 # Ensure environment variables are available when scripts run directly.
 load_dotenv(PROJECT_ROOT / ".env")
 
-EMBEDDING_PROVIDER = os.getenv("EMBEDDING_PROVIDER").lower()
+EMBEDDING_PROVIDER = (os.getenv("EMBEDDING_PROVIDER") or "").lower()
 EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL")
 LOCAL_EMBEDDING_MODEL = os.getenv("LOCAL_EMBEDDING_MODEL")
 

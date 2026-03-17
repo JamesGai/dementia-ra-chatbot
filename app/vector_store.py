@@ -1,9 +1,11 @@
 """Helpers for creating and accessing the project's Chroma vector store."""
 
+import os
+
 import chromadb
 from chromadb.config import Settings
 
-DEFAULT_PERSIST_DIR = "./chroma_db"
+DEFAULT_PERSIST_DIR = os.getenv("CHROMA_PERSIST_DIR", "./chroma_db")
 DEFAULT_COLLECTION_NAME = "ediva_knowledge"
 
 
