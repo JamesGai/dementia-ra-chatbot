@@ -1,8 +1,16 @@
+from flask import Flask
+from flask_cors import CORS
+from .routes import bp
+
 def create_app():
-    from flask import Flask
     app = Flask(__name__)
 
-    from .routes import bp
+    CORS(
+        app,
+        resources={r"/api/*": {"origins": "*"}},
+        supports_credentials=False,
+    )
 
     app.register_blueprint(bp)
+
     return app
