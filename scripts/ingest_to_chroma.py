@@ -7,6 +7,8 @@ import sys
 from pathlib import Path
 from typing import Any
 
+from chromadb.errors import InvalidArgumentError
+
 # Allow running this file directly from the repo root
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
@@ -121,13 +123,20 @@ def ingest(reset_collection: bool = False) -> None:
         return
 
     print("[ingest] Adding embeddings to Chroma...")
-
-    collection.add(
-        ids=ids,
-        documents=docs,
-        metadatas=metas,
-        embeddings=embs,
-    )
+    try:
+        collection.add(
+            ids=ids,
+            documents=docs,
+            metadatas=metas,
+            embeddings=embs,
+        )
+    except InvalidArgumentError as exc:
+        raise RuntimeError(
+            "[ingest] Chroma rejected the embeddings, usually because this "
+            f"collection was created with a different embedding dimension. "
+            f"Active collection: '{DEFAULT_COLLECTION_NAME}'. "
+            "Re-run with '--reset' to rebuild the active collection."
+        ) from exc
 
     print(f"[ingest] Successfully added {len(ids)} vectors.")
 
