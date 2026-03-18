@@ -9,6 +9,7 @@ load_dotenv(PROJECT_ROOT / ".env")
 
 GEMINI_MODEL = (os.getenv("GEMINI_MODEL") or "gemini-2.5-flash").strip()
 
+
 @lru_cache(maxsize=1)
 def get_client() -> genai.Client:
     api_key = (os.getenv("GEMINI_API_KEY") or "").strip()
@@ -18,6 +19,7 @@ def get_client() -> genai.Client:
             "Add it to a .env file or export it in your shell."
         )
     return genai.Client(api_key=api_key)
+
 
 def generate_text(prompt: str, model: str = GEMINI_MODEL) -> str:
     response = get_client().models.generate_content(model=model, contents=prompt)
