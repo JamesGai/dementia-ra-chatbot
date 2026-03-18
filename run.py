@@ -31,9 +31,8 @@ def run_startup_ingestion():
 
     try:
         print("[INGEST] Running ingestion at startup...")
-        from scripts.ingest_to_chroma import main as ingest_main
-
-        ingest_main()
+        from scripts.ingest_to_chroma import ingest
+        ingest(reset_collection=False)
         print("[INGEST] Startup ingestion completed successfully.")
     except Exception as exc:
         print(f"[INGEST] Startup ingestion failed: {exc}")
