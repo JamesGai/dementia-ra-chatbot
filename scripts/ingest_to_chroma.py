@@ -152,6 +152,11 @@ def _parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-if __name__ == "__main__":
+def main() -> None:
+    """CLI-compatible entry point used by startup hooks and direct execution."""
     args = _parse_args()
     ingest(reset_collection=args.reset)
+
+
+if __name__ == "__main__":
+    main()
