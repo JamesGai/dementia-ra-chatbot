@@ -1,11 +1,13 @@
 from app.embeddings import embed_text
 from app.gemini import generate_text
-from app.vector_store_local import get_vector_store
+from app.vector_store_local import get_vector_store as get_vector_store_local
+from app.vector_store_cloud import get_vector_store as get_vector_store_cloud
 
 
 def retrieve(query: str, top_k: int = 5):
     """Embed query text and retrieve top-k documents from Chroma."""
-    collection = get_vector_store()
+    # collection = get_vector_store_local() # Retrieve local Chroma
+    collection = get_vector_store_cloud() # Retrieve Chroma Cloud
     query_embedding = embed_text(query)
 
     results = collection.query(
