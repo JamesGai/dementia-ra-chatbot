@@ -6,7 +6,7 @@ import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from app.embeddings import embed_text
-from app.vector_store import get_vector_store
+from app.vector_store_local import get_vector_store
 
 
 def search(query, top_k=5):

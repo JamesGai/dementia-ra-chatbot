@@ -1,11 +1,10 @@
-"""Helpers for creating and accessing the project's Chroma vector store."""
+"""Helpers for creating and accessing the project's Chroma Cloud vector store."""
 
 import os
 import re
 
 import chromadb
 
-DEFAULT_PERSIST_DIR = os.getenv("CHROMA_PERSIST_DIR", "./chroma_db")
 _BASE_COLLECTION_NAME = os.getenv("CHROMA_COLLECTION_NAME", "ediva_knowledge")
 
 
@@ -32,12 +31,26 @@ def get_collection_name() -> str:
 DEFAULT_COLLECTION_NAME = get_collection_name()
 
 
-def get_chroma_client(persist_dir=DEFAULT_PERSIST_DIR):
-    """Return a persistent Chroma client backed by the given directory."""
-    return chromadb.PersistentClient(path=persist_dir)
+def get_chroma_client():
+    """Return a Chroma Cloud client using environment variables."""
+    api_key = os.getenv("CHROMA_API_KEY")
+    tenant = os.getenv("CHROMA_TENANT")
+    database = os.getenv("CHROMA_DATABASE")
+
+    if not api_key:
+        raise RuntimeError("Missing CHROMA_API_KEY for Chroma Cloud.")
+
+    if tenant and database:
+        return chromadb.CloudClient(
+            api_key=api_key,
+            tenant=tenant,
+            database=database,
+        )
+
+    return chromadb.CloudClient(api_key=api_key)
 
 
-def get_vector_store(persist_dir=DEFAULT_PERSIST_DIR):
-    """Return the active Chroma collection, creating it if needed."""
-    client = get_chroma_client(persist_dir)
+def get_vector_store():
+    """Return the active Chroma Cloud collection, creating it if needed."""
+    client = get_chroma_client()
     return client.get_or_create_collection(name=get_collection_name())

@@ -114,8 +114,10 @@ One dependency in Chroma `Pydantic` is not compatible with the latest Python ver
   - Raw and RAG-pipelined LLM endpoints
 - `static_knowledge_loader.py`
   - Helper function that reads all built-in JSON data
-- `vector_store.py`
-  - Helpers for creating and accessing the project's Chroma vector store
+- `vector_store_local.py`
+  - Helpers for creating and accessing the project's local Chroma vector store
+- `vector_store_cloud.py`
+  - Helpers for creating and accessing the project's Chroma Cloud vector store
 
 ## Scripts
 
@@ -127,9 +129,13 @@ One dependency in Chroma `Pydantic` is not compatible with the latest Python ver
   ```bash
   python scripts/test_<video><course><service>_embeddings.py
   ```
-- Transform static and dynamic knowledge into embeddings then load to Chroma:
+- Transform static and dynamic knowledge into embeddings then load to local Chroma:
   ```bash
-  python scripts/ingest_to_chroma.py
+  python scripts/ingest_to_chroma_local.py
+  ```
+  Transform static and dynamic knowledge into embeddings then load to Chroma Cloud:
+  ```bash
+  python scripts/ingest_to_chroma_cloud.py
   ```
 - Embed a query, run search in Chroma vector database, and print the top 3 matches:
   ```bash

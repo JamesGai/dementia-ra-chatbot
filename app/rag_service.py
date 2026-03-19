@@ -1,6 +1,6 @@
 from app.embeddings import embed_text
 from app.gemini import generate_text
-from app.vector_store import get_vector_store
+from app.vector_store_local import get_vector_store
 
 
 def retrieve(query: str, top_k: int = 5):
