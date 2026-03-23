@@ -1,4 +1,4 @@
-# python scripts/pdf_extraction.py
+# python scripts/test/test_pdf_extraction.py
 
 """Read the PDF and turn it into clean raw text page by page."""
 

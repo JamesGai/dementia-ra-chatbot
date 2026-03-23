@@ -1,4 +1,4 @@
-# python scripts/pdf_chunking.py
+# python scripts/test/test_pdf_chunking.py
 
 """Split extracted PDF text into searchable chunks with metadata."""
 
@@ -6,7 +6,7 @@ import argparse
 import re
 from pathlib import Path
 
-from pdf_extraction import extract_pdf_pages
+from scripts.test.test_pdf_extraction import extract_pdf_pages
 
 
 def split_into_paragraphs(text: str) -> list[str]:
