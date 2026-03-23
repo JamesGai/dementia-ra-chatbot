@@ -16,6 +16,7 @@ from app.static_knowledge_loader import load_static_knowledge
 from app.video_service import get_video_knowledge_objects
 from app.course_service import get_course_knowledge_objects
 from app.service_service import get_service_knowledge_objects
+from app.pdf_service import get_pdf_knowledge_objects
 from app.embeddings import embed_text
 from app.vector_store_local import (
     DEFAULT_COLLECTION_NAME,
@@ -84,7 +85,16 @@ def ingest(reset_collection: bool = False) -> None:
     print("[ingest] Loading service knowledge...")
     service_entries = get_service_knowledge_objects()
 
-    all_entries = static_entries + video_entries + course_entries + service_entries
+    print("[ingest] Loading PDF knowledge...")
+    pdf_entries = get_pdf_knowledge_objects()
+
+    all_entries = (
+        static_entries
+        + video_entries
+        + course_entries
+        + service_entries
+        + pdf_entries
+    )
 
     print(f"[ingest] Total entries to process: {len(all_entries)}")
 
