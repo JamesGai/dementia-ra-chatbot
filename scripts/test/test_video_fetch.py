@@ -3,8 +3,8 @@
 from pathlib import Path
 import sys
 
-# Allow running this file directly from the repo root.
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+# Allow running this file directly by adding the repo root to sys.path.
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from app.video_service import get_video_knowledge_objects
 
