@@ -123,11 +123,11 @@ One dependency in Chroma `Pydantic` is not compatible with the latest Python ver
 
 - Fetch and display transformed **video**/**course**/**service** knowledge as JSON objects:
   ```bash
-  python scripts/test_<video><course><service>_fetch.py
+  python scripts/test/test_<video><course><service>_fetch.py
   ```
 - Generate and display embeddings of fetched **video**/**course**/**service** knowledge:
   ```bash
-  python scripts/test_<video><course><service>_embeddings.py
+  python scripts/test/test_<video><course><service>_embeddings.py
   ```
 - Transform static and dynamic knowledge into embeddings then load to local Chroma:
   ```bash
@@ -139,11 +139,11 @@ One dependency in Chroma `Pydantic` is not compatible with the latest Python ver
   ```
 - Embed a query, run search in Chroma vector database, and print the top 3 matches:
   ```bash
-  python scripts/test_vector_search.py
+  python scripts/test/test_vector_search.py
   ```
 - Run a simple CLI loop to manually test RAG chat responses:
   ```bash
-  python scripts/test_rag_chat.py
+  python scripts/test/test_rag_chat.py
   ```
 
 ## Start Server
