@@ -1,4 +1,4 @@
-# python scripts/test_course_fetch.py
+# python scripts/test/test_course_fetch.py
 
 from pathlib import Path
 import sys

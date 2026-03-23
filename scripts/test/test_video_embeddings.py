@@ -1,4 +1,4 @@
-# python scripts/test_video_embeddings.py
+# python scripts/test/test_video_embeddings.py
 
 from pathlib import Path
 import sys

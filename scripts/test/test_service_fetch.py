@@ -1,4 +1,4 @@
-# python scripts/test_service_fetch.py
+# python scripts/test/test_service_fetch.py
 
 from pathlib import Path
 import sys

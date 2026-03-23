@@ -1,4 +1,4 @@
-# python scripts/test_vector_search.py
+# python scripts/test/test_vector_search.py
 
 from pathlib import Path
 import sys

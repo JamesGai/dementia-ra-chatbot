@@ -1,4 +1,4 @@
-# python scripts/test_course_embeddings.py
+# python scripts/test/test_course_embeddings.py
 
 from pathlib import Path
 import sys

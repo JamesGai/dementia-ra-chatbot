@@ -1,4 +1,4 @@
-# python scripts/test_service_embeddings.py
+# python scripts/test/test_service_embeddings.py
 
 from pathlib import Path
 import sys

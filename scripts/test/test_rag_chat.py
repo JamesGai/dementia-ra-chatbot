@@ -1,4 +1,4 @@
-# python scripts/test_rag_chat.py
+# python scripts/test/test_rag_chat.py
 
 import sys
 from pathlib import Path
