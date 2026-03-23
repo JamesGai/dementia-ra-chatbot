@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 # python scripts/pdf_extraction.py
 
 """Read the PDF and turn it into clean raw text page by page."""
