@@ -8,11 +8,12 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 # Ensure environment variables are available when scripts run directly.
 load_dotenv(PROJECT_ROOT / ".env")
 
-EMBEDDING_PROVIDER = os.getenv("EMBEDDING_PROVIDER").lower()
+EMBEDDING_PROVIDER = (os.getenv("EMBEDDING_PROVIDER") or "").lower()
 EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL")
 LOCAL_EMBEDDING_MODEL = os.getenv("LOCAL_EMBEDDING_MODEL")
 
 _local_model = None
+
 
 def get_embedding_client():
     """Create a Gemini client using the configured API key."""
@@ -58,6 +59,7 @@ def _get_local_model():
     _local_model = SentenceTransformer(LOCAL_EMBEDDING_MODEL)
     return _local_model
 
+
 def _embed_text_local(text: str):
     """Generate an embedding for text with the local transformer model."""
     model = _get_local_model()
@@ -65,6 +67,7 @@ def _embed_text_local(text: str):
     if hasattr(vector, "tolist"):
         return vector.tolist()
     return vector
+
 
 def embed_text(text: str):
     """Embed text with either Gemini or local model based on provider config."""

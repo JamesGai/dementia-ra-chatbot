@@ -1,8 +1,5 @@
 from flask import Blueprint, jsonify, request
 
-from .gemini import generate_text
-from .rag_service import generate_rag_answer
-
 bp = Blueprint("main", __name__)
 
 
@@ -14,6 +11,8 @@ def index():
 # Raw Gemini testing
 @bp.post("/api/gemini")
 def gemini():
+    from .gemini import generate_text
+
     payload = request.get_json(silent=True) or {}
     prompt = (payload.get("prompt") or "").strip()
     if not prompt:
@@ -30,6 +29,8 @@ def gemini():
 # RAG Chat Endpoint
 @bp.post("/api/chat")
 def chat():
+    from .rag_service import generate_rag_answer
+
     payload = request.get_json(silent=True) or {}
     prompt = (payload.get("prompt") or "").strip()
 

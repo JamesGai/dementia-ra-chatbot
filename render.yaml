@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: dementia-ra-chatbot-backend
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn run:app --bind 0.0.0.0:$PORT --workers 1 --timeout 120 --log-level debug --capture-output
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.11
+      - key: FLASK_DEBUG
+        value: "false"
+      - key: CHROMA_PERSIST_DIR
+        value: /opt/render/project/src/chroma_db
+    disk:
+      name: chroma-data
+      mountPath: /opt/render/project/src/chroma_db
+      sizeGB: 1
