@@ -55,7 +55,7 @@ To handle dynamic knowledge, we need to retrieve them from the database before e
    EMBEDDING_PROVIDER=local
    ```
 
-## Vector Database (Chroma)
+## Vector Database (Chroma Local or Cloud)
 
 ```bash
 Static JSON - Static knowledge
@@ -92,9 +92,9 @@ One dependency in Chroma `Pydantic` is not compatible with the latest Python ver
 
 ### Database setup
 
-1. Transform static and dynamic knowledge into embeddings then load to Chroma:
+1. Transform static and dynamic knowledge into embeddings then load to Chroma Local or Cloud:
    ```bash
-   python scripts/ingest_to_chroma.py
+   python scripts/ingest_to_chroma_<local><cloud>.py
    ```
 
 ## App
@@ -146,10 +146,14 @@ One dependency in Chroma `Pydantic` is not compatible with the latest Python ver
   python scripts/test/test_rag_chat.py
   ```
 
+## Deployment
+
+This chatbot service is hosted on Render
+
 ## Start Server
 
 ```bash
 python run.py
 ```
 
-Then open `http://127.0.0.1:5000/`.
+Then open `http://127.0.0.1:5050/`.
