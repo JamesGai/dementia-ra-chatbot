@@ -9,7 +9,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 load_dotenv(PROJECT_ROOT / ".env")
 
 EMBEDDING_PROVIDER = (os.getenv("EMBEDDING_PROVIDER") or "").lower()
-EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL")
+CLOUD_EMBEDDING_MODEL = os.getenv("CLOUD_EMBEDDING_MODEL")
 LOCAL_EMBEDDING_MODEL = os.getenv("LOCAL_EMBEDDING_MODEL")
 
 _local_model = None
@@ -27,7 +27,7 @@ def _embed_text_gemini(text: str):
     client = get_embedding_client()
 
     response = client.models.embed_content(
-        model=EMBEDDING_MODEL,
+        model=CLOUD_EMBEDDING_MODEL,
         contents=text
     )
 
