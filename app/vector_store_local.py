@@ -5,7 +5,7 @@ import os
 import chromadb
 
 DEFAULT_COLLECTION_NAME = "iSupport_local"
-DEFAULT_PERSIST_DIR = os.getenv("CHROMA_PERSIST_DIR", "./chroma_db")
+DEFAULT_PERSIST_DIR = "./chroma_db"
 
 
 def get_chroma_client(persist_dir=DEFAULT_PERSIST_DIR):
