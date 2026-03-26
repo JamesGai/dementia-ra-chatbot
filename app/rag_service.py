@@ -41,6 +41,13 @@ Rules:
 - If unsure, say you don't know.
 - Maintain a supportive and compassionate tone.
 - Provide practical guidance.
+- Keep answers short and easy to read on a mobile phone.
+- Use plain English and short sentences.
+- Prefer 2 to 4 short sentences.
+- Keep the full answer under 60 words unless the user clearly asks for more detail.
+- Focus on the single most useful answer first.
+- If steps are needed, use at most 3 short bullet points.
+- Do not write long paragraphs.
 """
 
     prompt = f"""
