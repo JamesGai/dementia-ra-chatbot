@@ -1,3 +1,5 @@
+import os
+
 from app.embeddings import embed_text
 from app.gemini import generate_text
 from app.vector_store_local import get_vector_store as get_vector_store_local
@@ -6,8 +8,14 @@ from app.vector_store_cloud import get_vector_store as get_vector_store_cloud
 
 def retrieve(query: str, top_k: int = 5):
     """Embed query text and retrieve top-k documents from Chroma."""
-    # collection = get_vector_store_local() # Retrieve local Chroma
-    collection = get_vector_store_cloud() # Retrieve Chroma Cloud
+    collection_type = os.getenv("COLLECTION_TYPE", "cloud").strip().lower()
+    collection = (
+        get_vector_store_local()
+        if collection_type == "local"
+        else get_vector_store_cloud()
+    )
+    print ("++++++++++++++ Vector DB type: ", collection_type, "++++++++++++++")
+    print ("++++++++++++++ Vector DB collection: ", collection, "++++++++++++++")
     query_embedding = embed_text(query)
 
     results = collection.query(

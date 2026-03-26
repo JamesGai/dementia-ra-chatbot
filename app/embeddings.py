@@ -1,4 +1,5 @@
 import os
+
 from pathlib import Path
 from google import genai
 from dotenv import load_dotenv
@@ -9,7 +10,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 load_dotenv(PROJECT_ROOT / ".env")
 
 EMBEDDING_PROVIDER = (os.getenv("EMBEDDING_PROVIDER") or "").lower()
-EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL")
+CLOUD_EMBEDDING_MODEL = os.getenv("CLOUD_EMBEDDING_MODEL")
 LOCAL_EMBEDDING_MODEL = os.getenv("LOCAL_EMBEDDING_MODEL")
 
 _local_model = None
@@ -27,7 +28,7 @@ def _embed_text_gemini(text: str):
     client = get_embedding_client()
 
     response = client.models.embed_content(
-        model=EMBEDDING_MODEL,
+        model=CLOUD_EMBEDDING_MODEL,
         contents=text
     )
 
@@ -72,8 +73,10 @@ def _embed_text_local(text: str):
 def embed_text(text: str):
     """Embed text with either Gemini or local model based on provider config."""
     if EMBEDDING_PROVIDER == "local":
+        print ("++++++++++++++ Embedding function type: local ++++++++++++++")
         return _embed_text_local(text)
     if EMBEDDING_PROVIDER == "gemini":
+        print ("++++++++++++++ Embedding function type: gemini ++++++++++++++")
         return _embed_text_gemini(text)
     raise RuntimeError(
         f"Unsupported EMBEDDING_PROVIDER='{EMBEDDING_PROVIDER}'. "
