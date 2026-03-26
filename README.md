@@ -93,8 +93,14 @@ One dependency in Chroma `Pydantic` is not compatible with the latest Python ver
 ### Database setup
 
 1. Transform static and dynamic knowledge into embeddings then load to Chroma Local or Cloud:
+
    ```bash
    python scripts/ingest_to_chroma_<local><cloud>.py
+   ```
+
+2. How to upload local vector database to Chroma Cloud:
+   ```bash
+   chroma copy --all --from-local --to-cloud --db dementia-ra --path ./chroma_db
    ```
 
 ## App

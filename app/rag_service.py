@@ -14,7 +14,8 @@ def retrieve(query: str, top_k: int = 5):
         if collection_type == "local"
         else get_vector_store_cloud()
     )
-    print ("Vector DB collection: ", collection)
+    print ("++++++++++++++ Vector DB type: ", collection_type, "++++++++++++++")
+    print ("++++++++++++++ Vector DB collection: ", collection, "++++++++++++++")
     query_embedding = embed_text(query)
 
     results = collection.query(
