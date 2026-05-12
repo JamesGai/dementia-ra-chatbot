@@ -1,3 +1,7 @@
+import json
+from urllib.error import URLError
+from urllib.request import urlopen
+
 from flask import Blueprint, jsonify, request
 
 bp = Blueprint("main", __name__)
@@ -6,6 +10,16 @@ bp = Blueprint("main", __name__)
 @bp.get("/")
 def index():
     return jsonify({"message": "Flask project is running"})
+
+
+@bp.get("/whereami")
+def whereami():
+    """Temporary route to check the deployed server's outbound IP location."""
+    try:
+        with urlopen("https://ipinfo.io/json", timeout=10) as response:
+            return jsonify(json.loads(response.read().decode("utf-8")))
+    except URLError as exc:
+        return jsonify({"error": str(exc)}), 502
 
 
 # Raw Gemini testing
